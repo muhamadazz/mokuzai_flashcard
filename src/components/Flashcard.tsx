@@ -33,22 +33,22 @@ export function Flashcard({ words: initialWords }: FlashcardProps) {
       case "kanji":
         return (
           <div className="space-y-3">
-            <p className="text-2xl text-gray-600">{currentWord.hiragana}</p>
-            <p className="text-xl text-gray-500">{currentWord.arti}</p>
+            <p className="text-2xl text-white">{currentWord.hiragana}</p>
+            <p className="text-xl text-white/90">{currentWord.arti}</p>
           </div>
         );
       case "hiragana":
         return (
           <div className="space-y-3">
-            <p className="text-4xl text-gray-600">{currentWord.kanji}</p>
-            <p className="text-xl text-gray-500">{currentWord.arti}</p>
+            <p className="text-4xl text-white">{currentWord.kanji}</p>
+            <p className="text-xl text-white/90">{currentWord.arti}</p>
           </div>
         );
       case "arti":
         return (
           <div className="space-y-3">
-            <p className="text-4xl text-gray-600">{currentWord.kanji}</p>
-            <p className="text-2xl text-gray-500">{currentWord.hiragana}</p>
+            <p className="text-4xl text-white">{currentWord.kanji}</p>
+            <p className="text-2xl text-white/90">{currentWord.hiragana}</p>
           </div>
         );
     }
