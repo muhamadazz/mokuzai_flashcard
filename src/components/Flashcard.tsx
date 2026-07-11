@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { RotateCcw, ChevronLeft, ChevronRight, RefreshCw } from "lucide-react";
+import { RotateCcw, ChevronLeft, ChevronRight } from "lucide-react";
 import type { VocabularyWord } from "../data/vocabulary";
-import { shuffleArray } from "../data/vocabulary";
 
 interface FlashcardProps {
   words: VocabularyWord[];
@@ -10,7 +9,7 @@ interface FlashcardProps {
 type DisplayMode = "kanji" | "hiragana" | "arti";
 
 export function Flashcard({ words: initialWords }: FlashcardProps) {
-  const [words, setWords] = useState(() => shuffleArray(initialWords));
+  const [words] = useState(initialWords);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [displayMode, setDisplayMode] = useState<DisplayMode>("kanji");
@@ -66,12 +65,6 @@ export function Flashcard({ words: initialWords }: FlashcardProps) {
     setTimeout(() => {
       setCurrentIndex((prev) => (prev - 1 + words.length) % words.length);
     }, 150);
-  };
-
-  const handleShuffle = () => {
-    setWords(shuffleArray(words));
-    setCurrentIndex(0);
-    setIsFlipped(false);
   };
 
   return (
@@ -155,13 +148,6 @@ export function Flashcard({ words: initialWords }: FlashcardProps) {
           <ChevronRight className="w-5 h-5" />
         </button>
 
-        <button
-          onClick={handleShuffle}
-          className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
-          aria-label="Shuffle"
-        >
-          <RefreshCw className="w-5 h-5" />
-        </button>
       </div>
 
       {/* Progress bar */}

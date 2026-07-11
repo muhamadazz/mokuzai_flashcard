@@ -1,7 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { CheckCircle, XCircle, RotateCcw, Trophy } from "lucide-react";
 import type { VocabularyWord } from "../data/vocabulary";
-import { shuffleArray } from "../data/vocabulary";
 
 interface QuizProps {
   words: VocabularyWord[];
@@ -26,8 +25,7 @@ export function Quiz({ words }: QuizProps) {
   const [showResult, setShowResult] = useState(false);
 
   const generateQuestion = useCallback((word: VocabularyWord, allWords: VocabularyWord[]): Question => {
-    const otherWords = allWords.filter(w => w !== word);
-    const shuffledOthers = shuffleArray(otherWords).slice(0, 3);
+    const otherWords = allWords.filter(w => w !== word).slice(0, 3);
 
     let correctAnswer: string;
     let options: string[];
@@ -35,24 +33,15 @@ export function Quiz({ words }: QuizProps) {
     switch (quizMode) {
       case "kanji-to-arti":
         correctAnswer = word.arti;
-        options = shuffleArray([
-          correctAnswer,
-          ...shuffledOthers.map(w => w.arti),
-        ]);
+        options = [correctAnswer, ...otherWords.map(w => w.arti)];
         break;
       case "arti-to-kanji":
         correctAnswer = word.kanji;
-        options = shuffleArray([
-          correctAnswer,
-          ...shuffledOthers.map(w => w.kanji),
-        ]);
+        options = [correctAnswer, ...otherWords.map(w => w.kanji)];
         break;
       case "hiragana-to-arti":
         correctAnswer = word.arti;
-        options = shuffleArray([
-          correctAnswer,
-          ...shuffledOthers.map(w => w.arti),
-        ]);
+        options = [correctAnswer, ...otherWords.map(w => w.arti)];
         break;
     }
 
@@ -60,8 +49,7 @@ export function Quiz({ words }: QuizProps) {
   }, [quizMode]);
 
   const startQuiz = () => {
-    const shuffled = shuffleArray(words);
-    const qs = shuffled.map(w => generateQuestion(w, words));
+    const qs = words.map(w => generateQuestion(w, words));
     setQuestions(qs);
     setCurrentIndex(0);
     setScore(0);
