@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {
     const loadData = async () => {
       // First try to load from public folder
-      const excelData = await loadExcelFromUrl("/kotoba_mokuzai.xlsx");
+      const excelData = await loadExcelFromUrl("/kotoba_mokuzai_clean.xlsx");
       if (excelData.length > 0) {
         setVocabularyData(excelData);
       }

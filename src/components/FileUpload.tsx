@@ -29,11 +29,11 @@ export function FileUpload({ onDataLoaded, currentData }: FileUploadProps) {
   );
 
   const handleLoadFromPublic = useCallback(async () => {
-    const data = await loadExcelFromUrl("/kotoba_mokuzai.xlsx");
+    const data = await loadExcelFromUrl("/kotoba_mokuzai_clean.xlsx");
     if (data.length > 0) {
       onDataLoaded(data);
     } else {
-      alert("File /kotoba_mokuzai.xlsx tidak ditemukan. Silakan upload file Excel Anda.");
+      alert("File /kotoba_mokuzai_clean.xlsx tidak ditemukan. Silakan upload file Excel Anda.");
     }
   }, [onDataLoaded]);
 
@@ -75,7 +75,7 @@ export function FileUpload({ onDataLoaded, currentData }: FileUploadProps) {
             onClick={handleLoadFromPublic}
             className="text-sm text-gray-600 hover:text-gray-900 underline"
           >
-            Atau coba load dari /public/kotoba_mokuzai.xlsx
+            Atau coba load dari /public/kotoba_mokuzai_clean.xlsx
           </button>
         </div>
       </div>
